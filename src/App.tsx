@@ -38,50 +38,41 @@ class App extends Component {
     wallet: {},
     balance: 100,
     sendAmount: 0,
+    address: '',
     url: '',
     password: '',
   }
 
-  constructor() {
-    super({});
-    // if localstorage contains seed phrase, if localstorage doesn't have, call function "generateSeedPhrase" and put it in localstorage.
+  // if localstorage contains seed phrase
+  // if localstorage doesn't have, call function "generateSeedPhrase" and put it in localstorage.
+  async componentDidMount() {
     let localStorage = window.localStorage;
     let seed = localStorage.getItem('fuck-banks-seed');    
+
     if (!seed) {
       seed = EthereumHDWallet.generateSeedPhrase();
       localStorage.setItem('fuck-banks-seed', seed);
     }
     const wallet = new EthereumHDWallet(seed)
-    this.setState({
-      wallet: wallet,
-      balance: wallet.getBalance(),
-    });
-  }
-
-  createSendURL() {
-    const url = '';
-    this.setState({ url });
-  }
-
-  async createAndSendCheque(amt: number, password?: string) {
-    // await status = createCheque(amt, password);
-    // return status;
+    const balance = await wallet.getBalance()
+    const address = await wallet.getAddress()
+    this.setState(() => ({ wallet, balance, address }));
   }
 
   render() {
     let isSending = true;
-    let { wallet, balance, sendAmount, url } = this.state;
+    let { wallet, balance, sendAmount, address } = this.state;
     return (
       <div className="App">
         <div className="wallet">
           <div>
-            <div>Address</div>
-            <input type="text" value={'0x0'}></input>
-            <a href="TODO"><div>Add funds</div></a>
+            <div className="address">Address:</div>
+            <input className="address-input" type="text" value={address}></input>
+            {/* <a href="TODO"><div>Add funds</div></a> */}
           </div>
           <div>
-            <div>Balance: {balance}</div>
-            <a href="TODO"><div>Withdraw funds</div></a>
+            <div className="balance">Balance: {balance}</div>
+            {/* <a href="TODO"><div>Withdraw funds</div></a> */}
           </div>
         </div>
         {(isSending) ?

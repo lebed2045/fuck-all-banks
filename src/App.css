@@ -1,7 +1,8 @@
 .App {
   text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -14,6 +15,45 @@
   color: white;
 }
 
-.body {
-  background-color: #272727;
+input {
+  font-size: 20px;
+}
+
+.address {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.SocialMediaShareButton {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.address-input {
+  font-size: 20px;
+}
+
+.balance {
+  margin-bottom: 20px;
+}
+
+.send-amt {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.pwd {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.pwd-amt {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
 }

@@ -30,16 +30,24 @@ class Send extends Component {
     let url = this.state.url
     return (
       <div className="send">
-        <div>Send Amount</div>
-        <input
-          type="number"
-          onChange={(e) => { this.setState({sendAmount: e.target.value}) }}>
-        </input>
-        <input
-          type="string"
-          placeholder="password"
-          onChange={(e) => { this.setState({password: e.target.value}) }}>
-        </input>
+        <div>
+          <div className="send-amt">Send Amount</div>
+          <input
+            className="send-amt-input"
+            type="number"
+            onChange={(e) => { this.setState({sendAmount: e.target.value}) }}>
+          </input>
+        </div>
+        <div>
+          <div className="pwd">Password: </div>
+          <input
+            className="pwd-amt"
+            type="password"
+            placeholder="password"
+            onChange={(e) => { this.setState({password: e.target.value}) }}>
+          </input>
+        </div>
+        
         <div className="share-buttons">
           <TelegramShareButton url={url} beforeOnClick={this.createAndSendCheque}>
             <TelegramIcon />
