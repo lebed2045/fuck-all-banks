@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   render() {
-    let isSending = true;
+    let isSending = window.location.href.split('/')[3] === 'send';
     let { wallet, balance, sendAmount, address } = this.state;
     return (
       <div className="App">

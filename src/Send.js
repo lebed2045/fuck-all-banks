@@ -19,8 +19,10 @@ class Send extends Component {
   }
 
   createAndSendCheque() {
+    console.log("???????")
     return new Promise((res, rej) => {
       const url = this.props.wallet.createCheque(this.props.sendAmount, this.state.password);
+      // console.log("thing is: " + url)
       this.setState({ url: URL_PREFIX + url });
     });
   }
@@ -49,15 +51,25 @@ class Send extends Component {
         </div>
         
         <div className="share-buttons">
-          <TelegramShareButton url={url} beforeOnClick={this.createAndSendCheque}>
+          {/*
+          <div className="" onClick={() => {}}>
+            Confirm Amount
+          </div>
+          <div>
+            {URL_PREFIX + url}
+          </div>
+          */}
+          <TelegramShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
             <TelegramIcon />
           </TelegramShareButton>
-          <WhatsappShareButton url={url} beforeOnClick={this.createAndSendCheque}>
+          <WhatsappShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
             <WhatsappIcon />
           </WhatsappShareButton>
-          <EmailShareButton url={url} beforeOnClick={this.createAndSendCheque}>
+          <EmailShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
             <EmailIcon />
           </EmailShareButton>
+          
+          
         </div>
       </div>
     );

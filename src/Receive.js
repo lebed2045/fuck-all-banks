@@ -9,13 +9,13 @@ class Receive extends Component {
     return (
       <div className="receive">
         <div>
-          {/* <div>Address</div>
+          <div>Address</div>
           <input type="text" value={wallet.address || '0x0'}></input>
-          <a href="TODO"><div>Add funds</div></a> */}
+          <a href="TODO"><div>Add funds</div></a>
         </div>
         <div>
-          {/* <div>Balance: {balance}</div>
-          <a href="TODO"><div>Withdraw funds</div></a> */}
+          <div>Balance: {balance}</div>
+          <a href="TODO"><div>Withdraw funds</div></a>
         </div>
       </div>
     );
