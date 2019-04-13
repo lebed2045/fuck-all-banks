@@ -7,6 +7,8 @@ import {
   WhatsappIcon,
   EmailIcon,
 } from 'react-share';
+import Send from './Send';
+import Receive from './Receive';
 import './App.css';
 
 
@@ -39,6 +41,7 @@ class App extends Component {
     balance: 100,
     sendAmount: 0,
     url: '',
+    password: '',
   }
 
   constructor() {
@@ -64,7 +67,13 @@ class App extends Component {
     this.setState({ url });
   }
 
+  async createAndSendCheque(amt: number, password?: string) {
+    // await status = createCheque(amt, password);
+    // return status;
+  }
+
   render() {
+    let isSending = true;
     let { wallet, balance, sendAmount, url } = this.state;
     return (
       <div className="App">
@@ -79,29 +88,7 @@ class App extends Component {
             <a href="TODO"><div>Withdraw funds</div></a>
           </div>
         </div>
-        <div className="send">
-          <div>Send Amount</div>
-          <input
-            type="number"
-            onChange={(e) => {this.setState({sendAmount: e.target.value})}}>
-          </input>
-          <input
-            type="string"
-            placeholder="password"
-            onChange={(e) => {this.setState({password: e.target.value})}}>
-          </input>
-          <div className="share-buttons">
-            <TelegramShareButton url={url} >
-              <TelegramIcon />
-            </TelegramShareButton>
-            <WhatsappShareButton url={url}>
-              <WhatsappIcon />
-            </WhatsappShareButton>
-            <EmailShareButton url={url}>
-              <EmailIcon />
-            </EmailShareButton>
-          </div>
-        </div>
+        { (isSending) ? <Send /> : <Receive /> }
       </div>
     );
   }
