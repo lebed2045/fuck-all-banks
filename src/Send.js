@@ -14,16 +14,18 @@ const URL_PREFIX = 'localhost:3000/?transfer='
 
 class Send extends Component {
   state = {
-    url: '',
+    url: 'empty',
     password: '',
   }
 
-  createAndSendCheque() {
-    console.log("???????")
+  createAndSendCheque = () => {
+    let { wallet, balance, sendAmount } = this.props;
     return new Promise((res, rej) => {
-      const url = this.props.wallet.createCheque(this.props.sendAmount, this.state.password);
-      // console.log("thing is: " + url)
-      this.setState({ url: URL_PREFIX + url });
+      const result = wallet.createCheque(sendAmount, this.state.password);
+      result.then((val) => {
+        console.log("thing is: " + val)
+        this.setState({ url: URL_PREFIX + result });
+      })
     });
   }
 
@@ -48,6 +50,9 @@ class Send extends Component {
             placeholder="password"
             onChange={(e) => { this.setState({password: e.target.value}) }}>
           </input>
+          <button onClick={this.createAndSendCheque}>
+            Submit password.
+          </button>
         </div>
         
         <div className="share-buttons">
@@ -59,13 +64,15 @@ class Send extends Component {
             {URL_PREFIX + url}
           </div>
           */}
-          <TelegramShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
+          <TelegramShareButton title={'Github'} url={url}>
             <TelegramIcon />
           </TelegramShareButton>
-          <WhatsappShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
+          {/*
+          <WhatsappShareButton title={'Github'} url={url}>
             <WhatsappIcon />
           </WhatsappShareButton>
-          <EmailShareButton title={'Github'} url={url} beforeOnClick={this.createAndSendCheque}>
+          */}
+          <EmailShareButton title={'Github'} url={url}>
             <EmailIcon />
           </EmailShareButton>
           
