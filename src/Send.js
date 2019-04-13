@@ -17,7 +17,7 @@ class Send extends Component {
     password: '',
   }
 
-  createAndSendCheque(): Promise<void> {
+  createAndSendCheque() {
     // return new Promise((res, rej) => {
     //   const url = createCheque(this.props.sendAmount, this.state.password);
     //   this.setState({ url: URL_PREFIX + url });
