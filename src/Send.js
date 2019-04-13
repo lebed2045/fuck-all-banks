@@ -7,6 +7,7 @@ import {
   WhatsappIcon,
   EmailIcon,
 } from 'react-share';
+
 import './App.css';
 
 const URL_PREFIX = 'localhost:3000/?transfer='
@@ -18,18 +19,18 @@ class Send extends Component {
   }
 
   createAndSendCheque() {
-    // return new Promise((res, rej) => {
-    //   const url = createCheque(this.props.sendAmount, this.state.password);
-    //   this.setState({ url: URL_PREFIX + url });
-    // });
+    return new Promise((res, rej) => {
+      const url = this.props.wallet.createCheque(this.props.sendAmount, this.state.password);
+      this.setState({ url: URL_PREFIX + url });
+    });
   }
 
   render() {
-    // let { wallet, balance, sendAmount } = this.props;
-    // let url = this.state.url
+    let { wallet, balance, sendAmount } = this.props;
+    let url = this.state.url
     return (
       <div className="send">
-        {/* <div>Send Amount</div>
+        <div>Send Amount</div>
         <input
           type="number"
           onChange={(e) => { this.setState({sendAmount: e.target.value}) }}>
@@ -49,7 +50,7 @@ class Send extends Component {
           <EmailShareButton url={url} beforeOnClick={this.createAndSendCheque}>
             <EmailIcon />
           </EmailShareButton>
-        </div> */}
+        </div>
       </div>
     );
   }

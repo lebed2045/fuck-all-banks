@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import EthereumHDWallet from './eth-wallet/EthereumHDWallet';
 import './App.css';
 
 
 class Receive extends Component {
   render() {
-    // let { wallet, balance, sendAmount, url } = this.props;
+    let { wallet, balance, sendAmount, url } = this.props;
     return (
       <div className="receive">
         <div>

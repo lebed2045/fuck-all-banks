@@ -9,6 +9,7 @@ import {
 } from 'react-share';
 import Send from './Send';
 import Receive from './Receive';
+import EthereumHDWallet from './eth-wallet/EthereumHDWallet';
 import './App.css';
 
 
@@ -34,10 +35,7 @@ look into wyre for receiving side
 
 class App extends Component {
   state = {
-    wallet: {
-      "address": "0x0",
-      "amount": 100,
-    },
+    wallet: {},
     balance: 100,
     sendAmount: 0,
     url: '',
@@ -48,17 +46,16 @@ class App extends Component {
     super({});
     // if localstorage contains seed phrase, if localstorage doesn't have, call function "generateSeedPhrase" and put it in localstorage.
     let localStorage = window.localStorage;
-    let seed = localStorage.getItem('fuck-banks-seed');
-    // if (!seed) {
-    //   seed = generateSeedPhrase();
-    //   // HDWallet wallet = createHDWallet(seed);
-    //   localStorage.setItem('fuck-banks-seed', seed);
-    // }
-    // 
-    // this.setState({
-    //   wallet: getWallet(seed),
-    //   balance: getBalance(),
-    // });
+    let seed = localStorage.getItem('fuck-banks-seed');    
+    if (!seed) {
+      seed = generateSeedPhrase();
+      localStorage.setItem('fuck-banks-seed', seed);
+    }
+    
+    this.setState({
+      wallet: EthereumHDWallet(seed),
+      balance: getBalance(),
+    });
   }
 
   createSendURL() {
@@ -87,8 +84,9 @@ class App extends Component {
             <a href="TODO"><div>Withdraw funds</div></a>
           </div>
         </div>
-        {/* { (isSending) ?
-          <Send wallet={wallet} balance={balance} sendAmount={sendAmount} /> : <Receive /> } */}
+        {(isSending) ?
+          <Send wallet={wallet} balance={balance} sendAmount={sendAmount} /> :
+          <Receive wallet={wallet} balance={balance} sendAmount={sendAmount} /> }
       </div>
     );
   }
