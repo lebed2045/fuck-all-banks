@@ -9,49 +9,47 @@ import {
 } from 'react-share';
 import './App.css';
 
+const URL_PREFIX = 'localhost:3000/?transfer='
 
 class Send extends Component {
-  createSendURL() {
-    const url = '';
-    this.setState({ url });
+  state = {
+    url: '',
+    password: '',
   }
 
-  async createAndSendCheque(amt: number, password?: string) {
-    // await status = createCheque(amt, password);
-    // return status;
+  createAndSendCheque(): Promise<void> {
+    // return new Promise((res, rej) => {
+    //   const url = createCheque(this.props.sendAmount, this.state.password);
+    //   this.setState({ url: URL_PREFIX + url });
+    // });
   }
 
   render() {
-    let { wallet, balance, sendAmount, url } = this.state;
+    // let { wallet, balance, sendAmount } = this.props;
+    // let url = this.state.url
     return (
       <div className="send">
-        <div>Send Amount</div>
+        {/* <div>Send Amount</div>
         <input
           type="number"
-          onChange={(e) => {
-            this.setState({sendAmount: e.target.value})
-            this.createSendURL();
-          }}>
+          onChange={(e) => { this.setState({sendAmount: e.target.value}) }}>
         </input>
         <input
           type="string"
           placeholder="password"
-          onChange={(e) => {
-            this.setState({password: e.target.value});
-            this.createSendURL();
-          }}>
+          onChange={(e) => { this.setState({password: e.target.value}) }}>
         </input>
         <div className="share-buttons">
-          <TelegramShareButton url={url}>
+          <TelegramShareButton url={url} beforeOnClick={this.createAndSendCheque}>
             <TelegramIcon />
           </TelegramShareButton>
-          <WhatsappShareButton url={url}>
+          <WhatsappShareButton url={url} beforeOnClick={this.createAndSendCheque}>
             <WhatsappIcon />
           </WhatsappShareButton>
-          <EmailShareButton url={url}>
+          <EmailShareButton url={url} beforeOnClick={this.createAndSendCheque}>
             <EmailIcon />
           </EmailShareButton>
-        </div>
+        </div> */}
       </div>
     );
   }

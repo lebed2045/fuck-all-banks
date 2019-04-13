@@ -59,7 +59,6 @@ class App extends Component {
     //   wallet: getWallet(seed),
     //   balance: getBalance(),
     // });
-    
   }
 
   createSendURL() {
@@ -88,7 +87,8 @@ class App extends Component {
             <a href="TODO"><div>Withdraw funds</div></a>
           </div>
         </div>
-        { (isSending) ? <Send /> : <Receive /> }
+        {/* { (isSending) ?
+          <Send wallet={wallet} balance={balance} sendAmount={sendAmount} /> : <Receive /> } */}
       </div>
     );
   }
