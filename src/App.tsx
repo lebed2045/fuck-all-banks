@@ -48,13 +48,13 @@ class App extends Component {
     let localStorage = window.localStorage;
     let seed = localStorage.getItem('fuck-banks-seed');    
     if (!seed) {
-      seed = generateSeedPhrase();
+      seed = EthereumHDWallet.generateSeedPhrase();
       localStorage.setItem('fuck-banks-seed', seed);
     }
-    
+    const wallet = new EthereumHDWallet(seed)
     this.setState({
-      wallet: EthereumHDWallet(seed),
-      balance: getBalance(),
+      wallet: wallet,
+      balance: wallet.getBalance(),
     });
   }
 
@@ -76,7 +76,7 @@ class App extends Component {
         <div className="wallet">
           <div>
             <div>Address</div>
-            <input type="text" value={wallet.address || '0x0'}></input>
+            <input type="text" value={'0x0'}></input>
             <a href="TODO"><div>Add funds</div></a>
           </div>
           <div>
