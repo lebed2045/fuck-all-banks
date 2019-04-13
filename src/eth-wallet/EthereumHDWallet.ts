@@ -36,7 +36,7 @@ export default class EthereumHDWallet {
         let wallet_hdpath = "m/44'/60'/0'/0/";
 
         this.accounts = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 100; i++) {
 
             let wallet = hdwallet.derivePath(wallet_hdpath + i).getWallet();
             let address = '0x' + wallet.getAddress().toString("hex");
@@ -67,6 +67,14 @@ export default class EthereumHDWallet {
     }
 
     async createCheque(amount: number, password: string): Promise<string> {
+        // // get new unused temp account
+        // let accountIndex = 1;
+        // while (this.getBalance(this.accounts[accountIndex].address))
+        // // create tx account -> temp account
+        // // send sendTransaction
+        // // encrypt private-key
+        // // return serialized
+
         return "";
     }
 
