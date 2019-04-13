@@ -60,6 +60,12 @@ export default class EthereumHDWallet {
         return this.accounts[0].address;
     }
 
+    async wasAddressUsed(address: string): Promise<boolean> {
+        // http://api-ropsten.etherscan.io/api?module=account&action=txlist&address=0xde0b295668a9fd93d5f28d9ec85e40f4cb697bae
+        const response = await Axios.get("http://api-ropsten.etherscan.io/api?module=account&action=txlist&address="+address);
+        const responseJson = response.data;
+        return responseJson["status"] != "0";
+    }
     async getBalance(address?: string): Promise<number> {
         address = address || this.accounts[0].address;
         const balance = await this.web3.eth.getBalance(address);
@@ -67,7 +73,7 @@ export default class EthereumHDWallet {
     }
 
     async createCheque(amount: number, password: string): Promise<string> {
-        // // get new unused temp account
+        // get new unused temp account
         // let accountIndex = 1;
         // while (this.getBalance(this.accounts[accountIndex].address))
         // // create tx account -> temp account
