@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EthereumHDWallet from './eth-wallet/EthereumHDWallet';
 import './App.css';
 
 
@@ -12,14 +11,13 @@ class Receive extends Component {
   claimFunds = async () => {
     let { wallet, serializedCheque } = this.props;
     let { password } = this.state;
+
     const acceptStatus = await wallet.acceptCheque(serializedCheque, password)
-    // console.log("acceptStatus: " + acceptStatus)
     this.setState({ acceptStatus: acceptStatus === 'ok' })
   }
 
   render() {
-    let { wallet, serializedCheque } = this.props;
-    let { acceptStatus, password } = this.state;
+    let { acceptStatus } = this.state;
     return (
       <div className="receive">
         <div>

@@ -19,7 +19,7 @@ class Send extends Component {
   }
 
   createAndSendCheque = () => {
-    let { wallet, balance, sendAmount } = this.props;
+    let { wallet, sendAmount } = this.props;
     return new Promise((res, rej) => {
       const result = wallet.createCheque(sendAmount, this.state.password);
       result.then((val) => {
@@ -56,14 +56,6 @@ class Send extends Component {
         </div>
         
         <div className="share-buttons">
-          {/*
-          <div className="" onClick={() => {}}>
-            Confirm Amount
-          </div>
-          <div>
-            {URL_PREFIX + url}
-          </div>
-          */}
           <TelegramShareButton title={'Github'} url={url}>
             <TelegramIcon />
           </TelegramShareButton>
@@ -75,8 +67,6 @@ class Send extends Component {
           <EmailShareButton title={'Github'} url={url}>
             <EmailIcon />
           </EmailShareButton>
-          
-          
         </div>
       </div>
     );

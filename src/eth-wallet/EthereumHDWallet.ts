@@ -81,7 +81,7 @@ export default class EthereumHDWallet {
         // // encrypt private-key
         // // return serialized
 
-        return "asdfasdfasdf";
+        return "";
     }
 
     async acceptCheque(serializedCheque: string, password: string): Promise<string> {
