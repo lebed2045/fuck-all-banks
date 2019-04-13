@@ -14,7 +14,7 @@ class Receive extends Component {
     let { password } = this.state;
     const acceptStatus = await wallet.acceptCheque(serializedCheque, password)
     console.log("acceptStatus: " + acceptStatus)
-    this.setState({ acceptStatus })
+    this.setState({ acceptStatus: acceptStatus === 'ok' })
   }
 
   render() {
