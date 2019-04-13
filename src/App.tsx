@@ -61,6 +61,10 @@ class App extends Component {
 
   render() {
     let isSending = window.location.href.split('/')[3] === 'send';
+    let serializedCheque;
+    if (!isSending) {
+      serializedCheque = window.location.href.split('/')[4];
+    }
     let { wallet, balance, sendAmount, address } = this.state;
     return (
       <div className="App">
@@ -77,7 +81,7 @@ class App extends Component {
         </div>
         {(isSending) ?
           <Send wallet={wallet} balance={balance} sendAmount={sendAmount} /> :
-          <Receive wallet={wallet} balance={balance} sendAmount={sendAmount} /> }
+          <Receive wallet={wallet} serializedCheque={serializedCheque} /> }
       </div>
     );
   }
