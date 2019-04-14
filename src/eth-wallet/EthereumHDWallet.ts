@@ -158,7 +158,7 @@ export default class EthereumHDWallet {
         // get new unused temp account
         let accountIndex = await this.getNextUnusedAccountIndex();
         // create tx account -> temp account
-        const response = this.signTransactionToIndex(accountIndex, amountOfWei);
+        const response = await this.signTransactionToIndex(accountIndex, amountOfWei);
         // send sendTransaction
         return encodeURI(this.accounts[accountIndex].privateKey);
         // encrypt private-key
