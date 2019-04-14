@@ -12,7 +12,7 @@ describe("EthereumHDWallet", async () => {
 
     // it("acceptCheque", async () => {
     //     console.log("txFee = ", ethereumHDWallet.getTxFee());
-    //     const response = await ethereumHDWallet.acceptCheque("da79b40d985b2dc4ca5b42a0bbd826552a48db822b365fd501e6f947e7dabc18");
+    //     const response = await ethereumHDWallet.acceptCheque("52d4094a69a3e2067e976e434ba57a001b10c388f688953a396a5d1beee22c09");
     //     console.log(response);
     //
     // });
@@ -29,6 +29,12 @@ describe("EthereumHDWallet", async () => {
     it("getBalance", async () => {
         const balance = await ethereumHDWallet.getBalance("0x04EBB7c0C5179041f83844CE79118Dd11B1da7FB");
         expect(balance).toBeGreaterThan(0);
+    });
+
+    it("getBalanceEther", async ()=> {
+        const balance = await ethereumHDWallet.getBalanceEther("0x04EBB7c0C5179041f83844CE79118Dd11B1da7FB");
+        expect(balance).toBeGreaterThan(0.3);
+        expect(balance).toBeLessThan(0.4);
     });
 
     it("wasAddressUsed", async () => {

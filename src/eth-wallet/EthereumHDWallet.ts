@@ -74,6 +74,13 @@ export default class EthereumHDWallet {
         return Number(balance);
     }
 
+    async getBalanceEther(address?: string): Promise<number> {
+        address = address || this.accounts[0].address;
+        const wei = await this.getBalance(address);
+        return wei/1000000000000000000;
+    }
+
+
     async signTransactionToIndex(index: number, amountWei: number) {
         const account_1 = this.web3.eth.accounts.privateKeyToAccount("0x" + this.accounts[0].privateKey);
         // console.log(index, this.accounts[index]);
