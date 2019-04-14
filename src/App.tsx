@@ -63,7 +63,7 @@ class App extends Component {
     let isSending = window.location.href.split('/')[3] === 'send';
     let serializedCheque;
     if (!isSending) {
-      serializedCheque = window.location.href.split('/')[4];
+      serializedCheque = window.location.href.split('=')[1];
     }
     let { wallet, balance, sendAmount, address } = this.state;
     return (

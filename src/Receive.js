@@ -4,7 +4,7 @@ import './App.css';
 
 class Receive extends Component {
   state = {
-    acceptStatus: false,
+    acceptStatus: 'Not started',
     password: '',
   }
 
@@ -12,12 +12,14 @@ class Receive extends Component {
     let { wallet, serializedCheque } = this.props;
     let { password } = this.state;
 
+    console.log("url " + serializedCheque)
     const acceptStatus = await wallet.acceptCheque(serializedCheque, password)
-    this.setState({ acceptStatus: acceptStatus === 'ok' })
+    this.setState({ acceptStatus })
   }
 
   render() {
     let { acceptStatus } = this.state;
+    console.log(this.props.serializedCheque)
     return (
       <div className="receive">
         <div>
@@ -29,10 +31,10 @@ class Receive extends Component {
             onChange={(e) => { this.setState({password: e.target.value}) }}>
           </input>
           <button onClick={this.claimFunds}>
-            Submit password.
+            Claim funds
           </button>
         </div>
-        {(acceptStatus) ? <div>Money received</div> : <div>Not started/Unsuccessful</div>}
+        {(acceptStatus === 'ok') ? <div>Money received</div> : <div>{acceptStatus}</div>}
       </div>
     );
   }

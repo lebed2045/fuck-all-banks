@@ -18,15 +18,12 @@ class Send extends Component {
     password: '',
   }
 
-  createAndSendCheque = () => {
+  createAndSendCheque = async () => {
     let { wallet, sendAmount } = this.props;
-    return new Promise((res, rej) => {
-      const result = wallet.createCheque(sendAmount, this.state.password);
-      result.then((val) => {
-        console.log("thing is: " + val)
-        this.setState({ url: URL_PREFIX + result });
-      })
-    });
+    const result = await wallet.createCheque(sendAmount, this.state.password);
+      console.log("thing is: " + result)
+      this.setState(() => ({ url: URL_PREFIX + result }));
+
   }
 
   render() {
@@ -56,7 +53,7 @@ class Send extends Component {
         </div>
         
         <div className="share-buttons">
-          <TelegramShareButton title={'Github'} url={url}>
+          <TelegramShareButton title={'test'} url={url}>
             <TelegramIcon />
           </TelegramShareButton>
           {/*
@@ -64,7 +61,7 @@ class Send extends Component {
             <WhatsappIcon />
           </WhatsappShareButton>
           */}
-          <EmailShareButton title={'Github'} url={url}>
+          <EmailShareButton title={'test'} url={url}>
             <EmailIcon />
           </EmailShareButton>
         </div>
