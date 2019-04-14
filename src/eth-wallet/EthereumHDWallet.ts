@@ -173,9 +173,9 @@ export default class EthereumHDWallet {
         const balance = await this.getBalance(chequeAccount.address);
         console.log("cheque Balance and privateKey= ", balance, privateKey);
         if (balance < 10000) {
-            throw new Error("Empty Check");
+            return "Empty cheque";
         }
-        const chequeAmountWei = balance - this.getTxFee() - 10;
+        const chequeAmountWei = balance - this.getTxFee() - 0;
         try {
             const response = await this.signTransaction(privateKey, this.getAddress(), chequeAmountWei);
             console.log(response);
