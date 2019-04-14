@@ -10,27 +10,37 @@ import {
 
 import './App.css';
 
-const URL_PREFIX = 'localhost:3000/?transfer='
+const URL_PREFIX = 'https://lucid-bassi-46f537.netlify.com/?transfer='
 
 class Send extends Component {
   state = {
     url: 'empty',
     password: '',
+    status: '', 
+    sendAmount: 0,
+    showLink: false,
   }
 
   createAndSendCheque = async () => {
-    let { wallet, sendAmount } = this.props;
-    const result = await wallet.createCheque(sendAmount, this.state.password);
-      console.log("thing is: " + result)
-      this.setState(() => ({ url: URL_PREFIX + result }));
+    let { wallet } = this.props;
+    let { sendAmount, password } = this.state;
 
+    try {
+      const result = await wallet.createCheque(sendAmount, password);
+      console.log("thing is: " + result)
+      this.setState(() => ({ url: URL_PREFIX + result, showLink: true }));
+    } catch(e) {
+      console.log("asdasd" + e)
+      this.setState({ status: e.message })
+    }
   }
 
   render() {
     let { wallet, balance, sendAmount } = this.props;
-    let url = this.state.url
+    let { status, showLink, url} = this.state;
     return (
       <div className="send">
+        <div>{'' + status}</div>
         <div>
           <div className="send-amt">Send Amount</div>
           <input
@@ -48,7 +58,7 @@ class Send extends Component {
             onChange={(e) => { this.setState({password: e.target.value}) }}>
           </input>
           <button onClick={this.createAndSendCheque}>
-            Submit password.
+            Show link
           </button>
         </div>
         
@@ -64,6 +74,7 @@ class Send extends Component {
           <EmailShareButton title={'test'} url={url}>
             <EmailIcon />
           </EmailShareButton>
+          {showLink && <div>{url}</div>}
         </div>
       </div>
     );

@@ -37,7 +37,6 @@ class App extends Component {
   state = {
     wallet: {},
     balance: 100,
-    sendAmount: 0,
     address: '',
     url: '',
     password: '',
@@ -54,37 +53,37 @@ class App extends Component {
       localStorage.setItem('fuck-banks-seed', seed);
     }
     const wallet = new EthereumHDWallet(seed)
-    const balance = await wallet.getBalance()
+    const balance = await wallet.getBalanceEther()
     const address = await wallet.getAddress()
     this.setState(() => ({ wallet, balance, address }));
   }
 
   render() {
-    let isSending = window.location.href.split('/')[3] === 'send';
+    let isReceiving = window.location.href.split('/')[3] !== 'send';
     let serializedCheque;
-    if (!isSending) {
+    if (!isReceiving) {
       serializedCheque = window.location.href.split('=')[1];
     }
-    let { wallet, balance, sendAmount, address } = this.state;
+    let { wallet, balance, address } = this.state;
     return (
       <div className="App">
         <div className="wallet">
           <div>
             <div className="address">Address:</div>
             <input className="address-input" type="text" value={address}></input>
-            {/* <a href="TODO"><div>Add funds</div></a> */}
           </div>
           <div>
             <div className="balance">Balance: {balance}</div>
-            {/* <a href="TODO"><div>Withdraw funds</div></a> */}
           </div>
         </div>
-        {(isSending) ?
-          <Send wallet={wallet} balance={balance} sendAmount={sendAmount} /> :
-          <Receive wallet={wallet} serializedCheque={serializedCheque} /> }
+        {(isReceiving) ?
+          <Receive wallet={wallet} serializedCheque={serializedCheque} /> :
+          <Send wallet={wallet} balance={balance} /> }
       </div>
     );
   }
 }
 
 export default App;
+
+"0x29db1183309daa28dbf4260f3525c8117444ffb0"
