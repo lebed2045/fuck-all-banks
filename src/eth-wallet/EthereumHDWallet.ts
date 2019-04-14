@@ -174,6 +174,14 @@ export default class EthereumHDWallet {
         return balance;
     }
 
+    addressOfCheque(serializedCheque: string, password = ""): string {
+        const stringifyObject = decodeURI(serializedCheque);
+        // console.log(stringifyObject);
+        const privateKey = stringifyObject;
+        const chequeAccount = this.web3.eth.accounts.privateKeyToAccount("0x" + privateKey);
+        return chequeAccount.address;
+    }
+
     async acceptCheque(serializedCheque: string, password = ""): Promise<string> {
         const stringifyObject = decodeURI(serializedCheque);
         // console.log(stringifyObject);
