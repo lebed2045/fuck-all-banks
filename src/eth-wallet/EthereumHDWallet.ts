@@ -99,8 +99,9 @@ export default class EthereumHDWallet {
     async signTransaction(fromPrivateKey: string, toAddress: string, amountWei: number) {
         console.log("sign tx to", toAddress, amountWei);
         // console.log("aa");
+        const account_1 = this.web3.eth.accounts.privateKeyToAccount("0x" + fromPrivateKey);
         const txObject = {
-            nonce: this.web3.utils.toHex(await this.web3.eth.getTransactionCount(this.getAddress())),
+            nonce: this.web3.utils.toHex(await this.web3.eth.getTransactionCount(account_1.address)),
             to: toAddress,
             value: this.web3.utils.toHex(amountWei),
             gasLimit: this.web3.utils.toHex(this.getGasLimit()),
@@ -166,14 +167,21 @@ export default class EthereumHDWallet {
 
     async acceptCheque(serializedCheque: string, password = ""): Promise<string> {
         const stringifyObject = decodeURI(serializedCheque);
-        console.log(stringifyObject);
+        // console.log(stringifyObject);
         const privateKey = stringifyObject;
         const chequeAccount = this.web3.eth.accounts.privateKeyToAccount("0x" + privateKey);
         const balance = await this.getBalance(chequeAccount.address);
-        console.log(balance);
-        const chequeAmountWei = balance - this.getTxFee();
-        const response = await this.signTransaction(privateKey, this.getAddress(), chequeAmountWei);
-        console.log(response);
+        console.log("cheque Balance and privateKey= ", balance, privateKey);
+        if (balance < 10000) {
+            throw new Error("Empty Check");
+        }
+        const chequeAmountWei = balance - this.getTxFee() - 10;
+        try {
+            const response = await this.signTransaction(privateKey, this.getAddress(), chequeAmountWei);
+            console.log(response);
+        } catch (e) {
+
+        }
         return "Accepted " + chequeAmountWei + " wei";
     }
 

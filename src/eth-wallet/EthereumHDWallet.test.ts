@@ -11,8 +11,10 @@ describe("EthereumHDWallet", async () => {
     });
 
     // it("acceptCheque", async () => {
+    //     console.log("txFee = ", ethereumHDWallet.getTxFee());
     //     const response = await ethereumHDWallet.acceptCheque("da79b40d985b2dc4ca5b42a0bbd826552a48db822b365fd501e6f947e7dabc18");
-    //     console.log(ethereumHDWallet.getTxFee());
+    //     console.log(response);
+    //
     // });
 
     it("HD", () => {
